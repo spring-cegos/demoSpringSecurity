@@ -1,0 +1,41 @@
+### test accès ressource publique
+GET http://localhost:8080/ressourcePublique
+
+### test accès ressource privee
+GET http://localhost:8080/ressourcePrivee
+Authorization: Basic membre1 membre1
+
+### test accès ressource admin
+GET http://localhost:8080/ressourceAdmin
+Authorization: Basic admin admin123
+
+### On recherche les tâches selon le terme de recherche "faire"
+GET http://localhost:8080/todo?termeRecherche=faire
+
+### On crée une tâche trop longue et dans le passé (cas d'erreur)
+POST http://localhost:8080/todo
+Content-Type: application/json
+
+{ "name" : "nouvelle tâche trop longue", "dueDate": "2026-01-01"}
+
+### On crée une tâche (cas nominal)
+POST http://localhost:8080/todo
+Content-Type: application/json
+
+{ "name" : "une tâche", "dueDate": "2027-01-01", "responsable" :  { "prenom" : "Cyril", "nom": "Mace"}}
+
+
+### On modifie la tâche d'id : 2
+PUT http://localhost:8080/todo/2
+Content-Type: application/json
+
+{ "name" : "tâche modifiée", "dueDate": "2028-01-01"}
+
+### On supprime la tâche d'id : 2
+DELETE http://localhost:8080/todo/2
+
+### On recupère la tâche d'id : 3
+GET http://localhost:8080/todo/3
+
+### On recupère les tâches contenant : "faire"
+GET http://localhost:8080/todo?termeRecherche=Pouce
